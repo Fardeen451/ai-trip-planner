@@ -18,6 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 function Header() {
 
   const user=JSON.parse(localStorage.getItem('user'));
@@ -46,9 +47,15 @@ function Header() {
     })
   }
 
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  }
+
   return (
     <div className='p-3 shadow-sm flex justify-between items-center px-5'>
-        <img src="/logo.svg" alt=""/>
+        <a href="/">
+          <img src="/logo.svg" alt="Website logo" className='cursor-pointer'/>
+        </a>
         <div>
           {user?
             <div className='flex items-center gap-3'>
@@ -73,7 +80,7 @@ function Header() {
             <Button onClick={()=>setOpenDialog(true)}>Sign In</Button>
           }
         </div>
-        <Dialog open={openDialog}>
+        <Dialog open={openDialog} onOpenChange={handleDialogClose}>
         
         <DialogContent>
           <DialogHeader>
